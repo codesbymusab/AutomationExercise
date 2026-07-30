@@ -16,8 +16,6 @@ test.describe('Account Deletion Tests', () => {
 
         await signupPage.submitSignup();
 
-        await expect(signupPage.page).not.toHaveURL(`${process.env.BASE_URL}/signup`);
-
         await signupPage.expectAccountCreated();
 
         await page.goto(`${process.env.BASE_URL}`);

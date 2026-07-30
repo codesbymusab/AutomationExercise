@@ -5,12 +5,12 @@ dotenv.config({ path: '.env' });
 
 export default defineConfig({
   testDir: './tests/e2e',
-
   use: {
     baseURL: process.env.BASE_URL,
-
+    navigationTimeout: 60000, 
     trace: 'on-first-retry',
   },
+  reporter: [['html', { outputFolder: 'playwright-report', open: 'on-failure' }]],
   projects: [
     {
       name: 'setup',

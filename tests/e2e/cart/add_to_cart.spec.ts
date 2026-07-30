@@ -78,31 +78,6 @@ test.describe('Cart Page Tests', () => {
         
     })
 
-    test('Verify logged in user cart persists after logout and login', async ({ emptyCartPage, productPage, loginPage }) => {
-
-        const product= testProductList[0];
-        
-        await loginPage.goto();
-        await loginPage.login(process.env.VALID_USERNAME, process.env.VALID_PASSWORD);
-
-        await productPage.goto(product.id);
-        await productPage.addToCart();
-        await productPage.expectConfirmationMessage();
-        await productPage.closeConfirmationMessage();   
-
-        await emptyCartPage.goto();
-        await emptyCartPage.expectItemInCart({ productName: product.name, quantity: 1, price: product.price });
-
-        await loginPage.logout();
-
-        await loginPage.goto();
-        await loginPage.login(process.env.VALID_USERNAME, process.env.VALID_PASSWORD);
-
-        await emptyCartPage.goto();
-        await emptyCartPage.expectItemInCart({ productName: product.name, quantity: 1, price: product.price });
-
-
-    })
 
     test('Verify adding duplicate product increases quanity only', async ({ emptyCartPage, productPage }) => {
 
@@ -126,6 +101,35 @@ test.describe('Cart Page Tests', () => {
         const updatedCartItemCount = await emptyCartPage.getCartItemCount();
 
         await expect(updatedCartItemCount).toBe(initialCartItemCount);
+
+
+    })
+
+    test.use({ storageState: { cookies: [], origins: [] } });
+
+    test('Verify logged in user cart persists after logout and login', async ({ emptyCartPage, productPage, loginPage }) => {
+
+        const product= testProductList[0];
+        
+        
+        await loginPage.goto();
+        await loginPage.login(process.env.VALID_USERNAME, process.env.VALID_PASSWORD);
+
+        await productPage.goto(product.id);
+        await productPage.addToCart();
+        await productPage.expectConfirmationMessage();
+        await productPage.closeConfirmationMessage();   
+
+        await emptyCartPage.goto();
+        await emptyCartPage.expectItemInCart({ productName: product.name, quantity: 1, price: product.price });
+
+        await loginPage.logout();
+
+        await loginPage.goto();
+        await loginPage.login(process.env.VALID_USERNAME, process.env.VALID_PASSWORD);
+
+        await emptyCartPage.goto();
+        await emptyCartPage.expectItemInCart({ productName: product.name, quantity: 1, price: product.price });
 
 
     })

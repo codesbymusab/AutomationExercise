@@ -40,14 +40,14 @@ export class CheckoutPage {
     async goto() {
 
         await this.page.goto(`${process.env.BASE_URL}/view_cart`);
-        await this.page.waitForLoadState('domcontentloaded');
         await this.proceedToCheckoutButton.click();
-
+        await this.page.waitForLoadState('domcontentloaded');
 
     }
 
     async verifyBillingUserDetails(testUserDetails: UserDetails) {
 
+     
         await expect(this.billingAddress).toBeVisible();
         await expect(this.billingAddress).toContainText(testUserDetails.FirstName);
         await expect(this.billingAddress).toContainText(testUserDetails.LastName);
@@ -63,6 +63,7 @@ export class CheckoutPage {
 
     async verifyDeliveryUserDetails(testUserDetails: UserDetails) {
 
+        
         await expect(this.deliveryAddress).toBeVisible();
         await expect(this.deliveryAddress).toContainText(testUserDetails.FirstName);
         await expect(this.deliveryAddress).toContainText(testUserDetails.LastName);

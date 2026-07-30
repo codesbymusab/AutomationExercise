@@ -2,61 +2,61 @@ import { test } from "../../../fixtures/cart.fixture";
 import { testProductList } from "../../../utils/data_generator";
 
 
-// test.describe('Checkout - Logged In User', () => {
+test.describe('Checkout - Logged In User', () => {
 
 
-//     test.beforeEach(async ({ cartPage }) => {
+    test.beforeEach(async ({ cartPage }) => {
 
 
-//         await cartPage.goto();
+        await cartPage.goto();
 
 
-//     })
+    })
 
-//     test('Verify that logged in user can proceed to checkout from his cart', async ({ cartPage }) => {
-
-
-
-//         await cartPage.proceedToCheckout();
-//         await cartPage.expectCartPageUrl();
-
-//     });
+    test('Verify that logged in user can proceed to checkout from his cart', async ({ cartPage }) => {
 
 
 
-// })
+        await cartPage.proceedToCheckout();
+        await cartPage.expectCartPageUrl();
 
-// test.describe('Checkout - Logged Out User', () => {
+    });
 
-//     test.use({ storageState: { cookies: [], origins: [] } }); 
 
-//     test.beforeEach(async ({ cartPage,loginPage }) => {
 
-//         await cartPage.goto();
+})
 
-//     })
+test.describe('Checkout - Logged Out User', () => {
 
-//     test('Verify logged out user can not proceed to checkout without login', async ({ cartPage, productPage, loginPage }) => {
+    test.use({ storageState: { cookies: [], origins: [] } }); 
 
-//         await cartPage.proceedToCheckout();
-//         await cartPage.expectLoginFirstModalVisible();
+    test.beforeEach(async ({ cartPage,loginPage }) => {
 
-//     })
+        await cartPage.goto();
 
-//     test('Verify user can continue shopping from checkout page login first modal', async ({ cartPage }) => {
+    })
 
-//         await cartPage.proceedToCheckout();
-//         await cartPage.expectLoginFirstModalContinueButton();
-//     })
+    test('Verify logged out user can not proceed to checkout without login', async ({ cartPage, productPage, loginPage }) => {
 
-//     test('Verify user can go to login page from checkout page login first modal', async ({ cartPage }) => {
+        await cartPage.proceedToCheckout();
+        await cartPage.expectLoginFirstModalVisible();
 
-//         await cartPage.proceedToCheckout();
-//         await cartPage.expectLoginFirstModalRegisterLoginButton();
+    })
 
-//     })
+    test('Verify user can continue shopping from checkout page login first modal', async ({ cartPage }) => {
 
-// })
+        await cartPage.proceedToCheckout();
+        await cartPage.expectLoginFirstModalContinueButton();
+    })
+
+    test('Verify user can go to login page from checkout page login first modal', async ({ cartPage }) => {
+
+        await cartPage.proceedToCheckout();
+        await cartPage.expectLoginFirstModalRegisterLoginButton();
+
+    })
+
+})
 
 test.describe('Checkout - Empty Cart', () => {
 
